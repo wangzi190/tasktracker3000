@@ -1,19 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+  <head>
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        display: inline;
+      }
+    </style>
+  </head>
 
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="">Home</a>
-          <a class="nav-item nav-link" href="">About</a>
-        </div>
-    </div>
-
-  </nav>
+  <body>
+    <ul>
+      <li><a href={{ url_for('index') }}>Index</a></li>
+      <li><a href={{ url_for('about') }}>About</a></li>
+      <li><a href={{ url_for('account') }}>Sign In</a></li>
+    </ul>
+  </body>
 
 </html>
