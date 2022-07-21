@@ -9,15 +9,18 @@
       }
       li {
         display: inline;
+        font-family:'Times New Roman', Times, serif
       }
     </style>
   </head>
 
   <body>
     <ul>
-      <li><a href={{ url_for('index') }}>Index</a></li>
-      <li><a href={{ url_for('about') }}>About</a></li>
-      <li><a href={{ url_for('account') }}>Sign In</a></li>
+      <!-- <li><img src="/images/test.png"></li> -->
+      <li><a href={{ url_for('index') }}><u>I</u>ndex</a></li>
+      <li><a href={{ url_for('about') }}><u>A</u>bout</a></li>
+      <li><a href={{ url_for('account.login') }}><u>L</u>og In</a></li>
+      <li><a href={{ url_for('tasks') }}><u>T</u>asks</a></li>
     </ul>
   </body>
 

@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  -->
+  {% block css %}
+  <style>
+    .top {
+      margin-top: 2rem;
+    }
+    .flogin {
+      margin-left: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    #remember {
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    #confirmpass {
+      margin-bottom: 1.5rem;
+    }
+    #text {
+      margin-left: 0.5rem;
+    }
+  </style>
+  {% endblock %}
+</head>
+
+<body>
+  {% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="column">
+        <form method="POST" id="login" action={{url_for('account.login')}}>
+          <label for="username" class="flogin top"><b>Username</b></label>
+          <input type="text" class="flogin form-control" name="username">
+          
+          <label for="password" class="flogin"><b>Password</b></label>
+          <input type="text" class="flogin form-control" name="password">
+
+          <input type="checkbox" class="flogin" id="remember" name="remember">
+          <label for="remember">Remember me</label>
+          
+          <br><input type="submit" class="flogin btn btn-primary" value="Log in">
+
+          <label for="label" id="text">Don't have an account? <a href={{ url_for('account.signup') }}>Sign up</a></label>
+          <input type="hidden" value="null" name="label">
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</body>
+</html>
