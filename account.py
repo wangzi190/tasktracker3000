@@ -3,6 +3,11 @@ from flask_login import login_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 account = Blueprint('account', __name__, url_prefix='/account', template_folder='templates/account')
 
+@account.route("/")
+@login_required
+def account_():
+    return render_template("/settings.html")
+
 @account.route("/login")
 def login():
     return render_template("/login.html")
@@ -12,13 +17,10 @@ def login_action():
     from main import User
     username=request.form['username']
     password=request.form['password']
-    if request.form['remember'] == None:
-        remember=False
-    else:
-        remember=True
+    remember=request.form['remember']
     validName = User.query.filter_by(username=str(username)).first()
-    validPass = check_password_hash(validName.password, password)
     if validName:
+        validPass = check_password_hash(validName.password, password)
         if validPass:
             identifier = User.query.filter_by(uid=validName.uid).first()
             password=generate_password_hash(password, method='sha256')
