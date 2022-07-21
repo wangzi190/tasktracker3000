@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect
+from flask_login import login_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 account = Blueprint('account', __name__, url_prefix='/account', template_folder='templates/account')
 
@@ -9,7 +10,6 @@ def login():
 @account.route("/login", methods=['POST'])
 def login_action():
     from main import User
-    from flask_login import login_user
     username=request.form['username']
     password=request.form['password']
     if request.form['remember'] == None:
@@ -35,6 +35,12 @@ def login_action():
         flash('Invalid username. Please try again.')
     
     return render_template("/index.html")
+
+@account.route("/logout")
+@login_required
+def logout():
+    flash('Successfully logged out.')
+    return redirect(url_for('index'))
 
 @account.route("/signup")
 def signup():
