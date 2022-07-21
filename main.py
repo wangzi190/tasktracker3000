@@ -32,11 +32,11 @@ db.init_app(main)
 def index():
     return render_template("/index.html")
 
-@main.route("/about/")
+@main.route("/about")
 def about():
     return render_template("/about.html")
 
-@main.route("/tasks/")
+@main.route("/tasks")
 def tasks():
     return render_template("/tasks.html")
 
@@ -70,9 +70,17 @@ class User(UserMixin, db.Model):
         self.email = email
         self.password = generate_password_hash(password, method='sha256')
 
+    def get_id(self):
+        return self.uid
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return None
+
 @login_manager.user_loader
 def load_user(uid):
-    return User.get(uid)
+    return User.query.get(uid)
 
 if __name__ == "__main__":
-  main.run(debug=True)
+    main.run(debug=True)
