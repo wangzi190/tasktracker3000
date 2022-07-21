@@ -29,12 +29,12 @@ def login_action():
             )
             login_user(returningUser, remember=remember)
             flash('Successfully logged in.')
+            return redirect(url_for('index'))
         else:
             flash('Invalid password. Please try again.')
     else:
         flash('Invalid username. Please try again.')
-    
-    return render_template("/index.html")
+    return render_template("/login.html")
 
 @account.route("/logout")
 @login_required

@@ -84,3 +84,4 @@ def load_user(uid):
 
 if __name__ == "__main__":
     main.run(debug=True)
+    # db.create_all()
