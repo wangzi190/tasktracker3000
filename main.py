@@ -41,25 +41,27 @@ def tasks():
     return render_template("/tasks.html")
 
 class User(UserMixin, db.Model):
-    uid = db.Column(
+    id = db.Column(
         db.Integer, 
         primary_key=True,
+        nullable=False,
     )
     username = db.Column(
         db.String(256),
         unique=True,
         nullable=False,
-        index=True
     )
     email = db.Column(
         db.String(256),
-        unique=False,
         nullable=False,
-        index=True
     )
     password = db.Column(
         db.String(256),
         nullable=False
+    )
+    tasks = db.relationship(
+        "Task",
+        backref='user'
     )
 
     def __repr__(self):
@@ -71,7 +73,71 @@ class User(UserMixin, db.Model):
         self.password = generate_password_hash(password, method='sha256')
 
     def get_id(self):
-        return self.uid
+        return self.id
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return None
+
+class Task(db.Model):
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+    )
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('user.id')
+    )
+    month = db.Column(
+        db.Integer,
+        nullable=False,
+    )
+    day = db.Column(
+        db.Integer,
+        nullable=False
+    )
+    year = db.Column(
+        db.Integer,
+        nullable=False,
+    )
+    taskName = db.Column(
+        db.String(256),
+        nullable=False
+    )
+    parts = db.Column(
+        db.Integer,
+        nullable=False
+    )
+    value = db.Column(
+        db.Integer,
+        nullable=False
+    )
+    status = db.Column(
+        db.Boolean,
+        nullable=False
+    )
+    stickers = db.Column(
+        db.String(256),
+        nullable=False
+    )
+
+    def __repr__(self):
+        return '<User {}>'.format(self.taskName)
+
+    def __init__(self, user_id, month, day, year, taskName, parts, value, status, stickers):
+        self.user_id = user_id
+        self.month = month
+        self.day = day
+        self.year = year
+        self.taskName = taskName
+        self.parts = parts
+        self.value = value
+        self.status = status
+        self.stickers = stickers
+
+    def get_id(self):
+        return self.tid
 
     def delete(self):
         db.session.delete(self)
@@ -79,8 +145,8 @@ class User(UserMixin, db.Model):
         return None
 
 @login_manager.user_loader
-def load_user(uid):
-    return User.query.get(uid)
+def load_user(id):
+    return User.query.get(id)
 
 if __name__ == "__main__":
     main.run(debug=True)

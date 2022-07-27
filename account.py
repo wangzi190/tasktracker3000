@@ -22,7 +22,7 @@ def login_action():
     if validName:
         validPass = check_password_hash(validName.password, password)
         if validPass:
-            identifier = User.query.filter_by(uid=validName.uid).first()
+            identifier = User.query.filter_by(id=validName.id).first()
             password=generate_password_hash(password, method='sha256')
             returningUser = User(
                 str(username),

@@ -9,19 +9,48 @@
       }
       li {
         display: inline;
-        font-family:'Times New Roman', Times, serif
+        font-family:'Times New Roman', Times, serif;
+      }
+      .icon {
+        display: block;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-top: 1rem;
+        filter: brightness(100%);
+      }
+      #nut1 {
+        margin-top: 2.8rem;
+      }
+      #screw {
+        margin-top: 1.5rem;
+        margin-right: 0.5rem;
+      }
+      #bolt {
+        margin-top: 4.5rem;
+      }
+      #nut2 {
+        margin-top: 2.4rem;
+        margin-left: 0.9rem;
       }
     </style>
   </head>
 
   <body>
-    <ul>
-      <!-- <li><img src="/images/test.png"></li> -->
-      <li><a href={{ url_for('index') }}><u>I</u>ndex</a></li>
-      <li><a href={{ url_for('about') }}><u>A</u>bout</a></li>
-      <li><a href={{ url_for('account.login') }}><u>L</u>og In</a></li>
-      <li><a href={{ url_for('tasks') }}><u>T</u>asks</a></li>
-    </ul>
+    <div class="container">
+    <div class="row">
+      <div class="column"><a href={{ url_for('index') }}><u>I</u>ndex</a></div>
+      <div class="column"><a href={{ url_for('about') }}><u>A</u>bout</a></div>
+      <div class="column"><a href={{ url_for('account.login') }}><u>L</u>og In</a></div>
+      <div class="column"><a href={{ url_for('tasks') }}><u>T</u>asks</a></div>
+    </div>
+    <div class="row">
+      <div class="column"><img src="https://user-images.githubusercontent.com/57303754/100566580-454d6b80-327b-11eb-8fd7-de53e3549bbd.png" width="35" id="nut1" class="icon" onmouseover="darken(id)" onmouseout="lighten(id)"></div>
+      <div class="column"><img src="https://user-images.githubusercontent.com/57303754/100566574-3ff02100-327b-11eb-945f-d5cc163ad5bd.png" width="90" id="screw" class="icon" onmouseover="darken(id)" onmouseout="lighten(id)"></div>
+      <div class="column"><img src="https://user-images.githubusercontent.com/57303754/100566579-42eb1180-327b-11eb-93ea-f925b50a3234.png" width="40" id="bolt" class="icon" onmouseover="darken(id)" onmouseout="lighten(id)"></div>
+      <div class="column"><img src="https://user-images.githubusercontent.com/57303754/100566580-454d6b80-327b-11eb-8fd7-de53e3549bbd.png" width="35" id="nut2" class="icon" onmouseover="darken(id)" onmouseout="lighten(id)"></div>
+    </div>
+    </div>
+    </div>
   </body>
 
 </html>
