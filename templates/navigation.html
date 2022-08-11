@@ -29,21 +29,21 @@
         margin-right: 0.5rem;
       }
       #title {
-        margin-top: 1rem;
+        margin-top: 0.75rem;
         margin-bottom: 0.5rem;
       }
       #nut1 {
-        margin-top: 1.3rem;
+        margin-top: 2.3rem;
       }
       #screw {
-        margin-top: 0rem;
+        margin-top: 1rem;
         margin-right: 0.5rem;
       }
       #bolt {
-        margin-top: 3rem;
+        margin-top: 4rem;
       }
       #nut2 {
-        margin-top: 0.9rem;
+        margin-top: 1.9rem;
         margin-left: 0.9rem;
       }
     </style>
@@ -62,6 +62,12 @@
 
     <div class="container">
     <div class="row justify-content-center">
+      <div class="column"><a href={{ url_for('index') }}><img src="https://user-images.githubusercontent.com/57303754/100566580-454d6b80-327b-11eb-8fd7-de53e3549bbd.png" width="35" id="nut1" class="icon index" onmouseover="darken(id)" onmouseout="lighten(id)"></a></div>
+      <div class="column"><a href={{ url_for('about') }}><img src="https://user-images.githubusercontent.com/57303754/100566574-3ff02100-327b-11eb-945f-d5cc163ad5bd.png" width="90" id="screw" class="icon about" onmouseover="darken(id)" onmouseout="lighten(id)"></a></div>
+      <div class="column"><a href={{ url_for('account.login') }}><img src="https://user-images.githubusercontent.com/57303754/100566579-42eb1180-327b-11eb-93ea-f925b50a3234.png" width="40" id="bolt" class="icon login" onmouseover="darken(id)" onmouseout="lighten(id)"></a></div>
+      <div class="column"><a href={{ url_for('tasks.view') }}><img src="https://user-images.githubusercontent.com/57303754/100566580-454d6b80-327b-11eb-8fd7-de53e3549bbd.png" width="35" id="nut2" class="icon tasks" onmouseover="darken(id)" onmouseout="lighten(id)"></a></div>
+    </div>
+    <div class="row justify-content-center">
       <img src="https://user-images.githubusercontent.com/57303754/184063414-f1eaaff5-669a-493d-9044-c263bdfc6f6b.png" id="title" width="300">
     </div>
     <div class="row justify-content-center">
@@ -74,12 +80,6 @@
       {% if current_user.is_authenticated %}
         <div class="column navtext">Hello, {{ current_user.username }}!</div>
       {% endif %}
-    </div>
-    <div class="row justify-content-center">
-      <div class="column"><a href={{ url_for('index') }}><img src="https://user-images.githubusercontent.com/57303754/100566580-454d6b80-327b-11eb-8fd7-de53e3549bbd.png" width="35" id="nut1" class="icon index" onmouseover="darken(id)" onmouseout="lighten(id)"></a></div>
-      <div class="column"><a href={{ url_for('about') }}><img src="https://user-images.githubusercontent.com/57303754/100566574-3ff02100-327b-11eb-945f-d5cc163ad5bd.png" width="90" id="screw" class="icon about" onmouseover="darken(id)" onmouseout="lighten(id)"></a></div>
-      <div class="column"><a href={{ url_for('account.login') }}><img src="https://user-images.githubusercontent.com/57303754/100566579-42eb1180-327b-11eb-93ea-f925b50a3234.png" width="40" id="bolt" class="icon login" onmouseover="darken(id)" onmouseout="lighten(id)"></a></div>
-      <div class="column"><a href={{ url_for('tasks.view') }}><img src="https://user-images.githubusercontent.com/57303754/100566580-454d6b80-327b-11eb-8fd7-de53e3549bbd.png" width="35" id="nut2" class="icon tasks" onmouseover="darken(id)" onmouseout="lighten(id)"></a></div>
     </div>
     </div>
     </div>
