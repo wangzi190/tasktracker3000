@@ -12,6 +12,8 @@ load_dotenv(dotenv_path)
 main = Flask(__name__, template_folder='templates')
 from account import account
 main.register_blueprint(account)
+from tasks import tasks
+main.register_blueprint(tasks)
 main.config.update(
     TESTING=True,
     DEBUG= True,
@@ -105,7 +107,11 @@ class Task(db.Model):
         db.String(256),
         nullable=False
     )
-    parts = db.Column(
+    category = db.Column(
+        db.String(256),
+        nullable=False
+    )
+    sections = db.Column(
         db.Integer,
         nullable=False
     )
@@ -113,7 +119,7 @@ class Task(db.Model):
         db.Integer,
         nullable=False
     )
-    status = db.Column(
+    completed = db.Column(
         db.Boolean,
         nullable=False
     )
@@ -125,15 +131,16 @@ class Task(db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.taskName)
 
-    def __init__(self, user_id, month, day, year, taskName, parts, value, status, stickers):
+    def __init__(self, user_id, month, day, year, taskName, category, sections, value, completed, stickers):
         self.user_id = user_id
         self.month = month
         self.day = day
         self.year = year
         self.taskName = taskName
-        self.parts = parts
+        self.category = category
+        self.sections = sections
         self.value = value
-        self.status = status
+        self.completed = completed
         self.stickers = stickers
 
     def get_id(self):

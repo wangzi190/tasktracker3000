@@ -16,7 +16,6 @@
       margin-top: 2rem;
     }
     .flogin {
-      margin-left: 2rem;
       margin-bottom: 0.5rem;
     }
     #remember {
@@ -36,7 +35,7 @@
 <body>
   {% block content %}
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="column">
         <form method="POST" id="login" action={{url_for('account.login_action')}}>
           <label for="username" class="flogin top"><b>Username</b></label>

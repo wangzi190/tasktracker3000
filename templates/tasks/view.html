@@ -13,7 +13,12 @@
 
 <body>
     {% block content %}
-        Tasks
+    <div class="row justify-content-center">
+        View Tasks<br>
+    </div>
+    <div class="row justify-content-center">
+        <p><a href={{ url_for('tasks.create') }}>Create</a> a Task</p>
+    </div>
     {% endblock %}
 </body>
 
