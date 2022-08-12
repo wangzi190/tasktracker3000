@@ -28,11 +28,13 @@
     {% include 'navigation.html' %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
+    <div class="row justify-content-center">
+      <ul class=flashes>
+      {% for message in messages %}
+        <li><b>NOTICE:</b> {{ message }}</li>
+      {% endfor %}
     </ul>
+    </div>
     {% endif %}
     {% endwith %}
     {% block content %}{% endblock %}

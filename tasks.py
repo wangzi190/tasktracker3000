@@ -3,8 +3,11 @@ from flask_login import login_required, current_user
 tasks = Blueprint('tasks', __name__, url_prefix='/tasks', template_folder='templates/tasks')
 
 @tasks.route("/view")
+@login_required
 def view():
-    return render_template("/view.html")
+    from main import Task
+    tasks = Task.query
+    return render_template("/view.html", tasks=tasks)
 
 @tasks.route("/create")
 def create():

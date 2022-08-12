@@ -73,12 +73,13 @@
     <div class="row justify-content-center">
       <div class="column navtext"><a href={{ url_for('index') }}><p class="index"><u>I</u>ndex</a></p></div>
       <div class="column navtext"><a href={{ url_for('about') }}><p class="about"><u>A</u>bout</a></p></div>
+      <div class="column navtext"><a href={{ url_for('tasks.view') }}><p class="tasks"><u>T</u>asks</a></p></div>
       {% if not current_user.is_authenticated %}
       <div class="column navtext"><a href={{ url_for('account.login') }}><p class="login"><u>L</u>og In</a></p></div>
       {% endif %}
-      <div class="column navtext"><a href={{ url_for('tasks.view') }}><p class="tasks"><u>T</u>asks</a></p></div>
       {% if current_user.is_authenticated %}
-        <div class="column navtext">Hello, {{ current_user.username }}!</div>
+      <div class="column navtext"><p>Hello, {{ current_user.username }}!</p></div>
+      <div class="column navtext"><a href={{ url_for('account.logout') }}><p class="tasks"><u>L</u>og out</a></p></div>
       {% endif %}
     </div>
     </div>

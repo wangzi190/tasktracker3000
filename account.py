@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, url_for, redirect
-from flask_login import login_user, login_required
+from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 account = Blueprint('account', __name__, url_prefix='/account', template_folder='templates/account')
 
@@ -24,12 +24,12 @@ def login_action():
         if validPass:
             identifier = User.query.filter_by(id=validName.id).first()
             password=generate_password_hash(password, method='sha256')
-            returningUser = User(
+            """returningUser = User(
                 str(username),
                 identifier.email,
                 str(password)
-            )
-            login_user(returningUser, remember=remember)
+            )"""
+            login_user(identifier, remember=remember)
             flash('Successfully logged in.')
             return redirect(url_for('index'))
         else:
@@ -41,6 +41,7 @@ def login_action():
 @account.route("/logout")
 @login_required
 def logout():
+    logout_user()
     flash('Successfully logged out.')
     return redirect(url_for('index'))
 

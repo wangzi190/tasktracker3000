@@ -6,20 +6,49 @@
 <head>
     {% block css %}
     <style>
-        
+
     </style>
     {% endblock %}
 </head>
 
 <body>
     {% block content %}
+    <div class="container">
     <div class="row justify-content-center">
-        View Tasks<br>
+        <p><a href={{ url_for('tasks.create') }}>Create</a> a task, <a href={{ url_for('tasks.stickers') }}>add</a> categories, or <a href={{ url_for('tasks.stickers') }}>upload</a> stickers.</p>
     </div>
     <div class="row justify-content-center">
-        <p><a href={{ url_for('tasks.create') }}>Create</a> a Task</p>
+        Your Tasks<br>
+    </div>
+    <div class="row justify-content-center">
+        <table class="table table-sm table-borderless table-hover">
+        <thead>
+            <tr>
+                <td><b>Stickers</b></td>
+                <td><b>Name</b></td>
+                <td><b>Category</b></td>
+                <td><b>Date</b></td>
+                <td><b>Sections</b></td>
+                <td><b>Value</b></td>
+                <td><b>Complete?</b></td>
+            </tr>
+        </thead><br>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.stickers }}</td>
+                <td>{{ task.taskName }}</td>
+                <td>{{ task.category }}</td>
+                <td>{{ task.month }}/{{ task.day }}/{{ task.year }}</td>
+                <td>{{ task.sections }}</td>
+                <td>{{ task.value }}</td>
+                <td>{{ task.completed }}</td>
+            </tr><br>
+        {% endfor %}
+        </tbody>    
+        </table>
+    </div>
     </div>
     {% endblock %}
 </body>
-
 </html>
