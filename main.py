@@ -144,7 +144,36 @@ class Task(db.Model):
         self.stickers = stickers
 
     def get_id(self):
-        return self.tid
+        return self.id
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return None
+
+class Category(db.Model):
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+    )
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('user.id')
+    )
+    categoryName = db.Column(
+        db.Integer,
+        nullable=False,
+    )
+
+    def __repr__(self):
+        return '<User {}>'.format(self.taskName)
+
+    def __init__(self, user_id, categoryName):
+        self.user_id = user_id
+        self.month = categoryName
+
+    def get_id(self):
+        return self.id
 
     def delete(self):
         db.session.delete(self)

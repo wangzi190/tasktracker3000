@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block css %}
+    <style>
+        .top {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .btm {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <b>Task Menu</b>
+        </div>
+        <div class="row justify-content-center">
+
+            <div class="column">
+                <div class="row justify-content-center">
+                    <div class="card top" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-title"><b>Create</b></p>
+                            <p class="card-text"><a href={{ url_for('tasks.create') }}>Add tasks</a></p>
+                            <p class="card-text"><a href={{ url_for('tasks.categories') }}>Add task categories</a></p>
+                            <p class="card-text"><a href={{ url_for('tasks.stickers') }}>Upload stickers</a></p>
+                        </div>
+                    </div>
+                    <div class="card top" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-title"><b>Read</b></p>
+                            <p class="card-text"><a href={{ url_for('tasks.view') }}>View tasks</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="row justify-content-center">
+                    <div class="card btm" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-title"><b>Update</b></p>
+                            <p class="card-text"><a href={{ url_for('tasks.view') }}>Add progress points</a></p>
+                            <p class="card-text"><a href={{ url_for('tasks.edit') }}>Edit tasks</a></p>
+                            <p class="card-text"><a href={{ url_for('tasks.categories') }}>Edit categories</a></p>
+                        </div>
+                    </div>
+                    <div class="card btm" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-title"><b>Delete</b></p>
+                            <p class="card-text"><a href={{ url_for('tasks.delete') }}>Delete tasks</a></p>
+                            <p class="card-text"><a href={{ url_for('tasks.categories') }}>Delete task categories</a></p>
+                            <p class="card-text"><a href={{ url_for('tasks.stickers') }}>Delete stickers</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
