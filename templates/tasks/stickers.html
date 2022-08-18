@@ -65,40 +65,6 @@
                     </div>
                     <div class="card top" style="width: 18rem;">
                         <div class="card-body">
-                            <table class="table table-sm table-borderless table-hover">
-                                <thead>
-                                    <tr>
-                                        <td><b>ID</b></td>
-                                        <td><b>Name</b></td>
-                                        <td><b>Image</b></td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for sticker in stickers %}
-                                    {% if sticker.user_id == current_user.id %}
-                                    <tr>
-                                        <td>{{ sticker.id }}</td>
-                                        <td>{{ sticker.stickerName }}</td>
-                                        <td>{{ sticker.image }}</td>
-                                    </tr>
-                                    {% endif %}
-                                {% endfor %}
-                                </tbody>    
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="row justify-content-center">
-                    <div class="card btm" style="width: 18rem;">
-                        <div class="card-body">
-                            <p class="card-title">There is no update operation for stickers. You may either upload or delete.</p>
-
-                        </div>
-                    </div>
-                    <div class="card btm" style="width: 18rem;">
-                        <div class="card-body">
                             <form method="POST" id="deleteSticker" action={{url_for('tasks.categories_action')}}></form>
                             <label for="stickerToDelete" class="faddSticker"><b>ID →</b></label>
                             <select id="stickerToDelete" name="stickerToDelete">
@@ -114,7 +80,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
   {% endblock %}

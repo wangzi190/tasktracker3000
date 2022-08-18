@@ -97,3 +97,8 @@ def stickers():
 @tasks.route("/stickers", methods=['POST'])
 def stickers_action():
     return render_template("/stickers.html")
+
+@tasks.route("/stickerbook")
+@login_required
+def stickerbook():
+    return render_template("/stickerbook.html")
