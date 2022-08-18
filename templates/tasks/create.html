@@ -42,7 +42,7 @@
 
           <label for="category"><b>Category</b></label>
           <select id="category" class="faddTask form-control" name="category">
-            <option>N/A</option>
+            <option value="N/A">N/A</option>
             {% for category in categories %}
                 {% if category.user_id == current_user.id %}
                     <option value={{ category.categoryName }}>{{ category.categoryName }}</option>

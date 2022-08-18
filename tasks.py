@@ -21,6 +21,11 @@ def create():
     categories = Category.query
     return render_template("/create.html", categories=categories)
 
+@tasks.route("/points")
+@login_required
+def points():
+    return render_template("/points.html")
+
 @tasks.route("/create", methods=['POST'])
 def task_create():
     from main import Task, db
