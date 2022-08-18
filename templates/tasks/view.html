@@ -21,9 +21,10 @@
         <table class="table table-sm table-borderless table-hover">
         <thead>
             <tr>
-                <td><b>Stickers</b></td>
+                <td><b>ID</b></td>
                 <td><b>Name</b></td>
                 <td><b>Category</b></td>
+                <td><b>Stickers</b></td>
                 <td><b>Date</b></td>
                 <td><b>Progress</b></td>
                 <td><b>Value</b></td>
@@ -34,9 +35,10 @@
         {% for task in tasks %}
             {% if task.user_id == current_user.id %}
             <tr>
-                <td>{{ task.stickers }}</td>
+                <td>{{ task.id }}</td>
                 <td>{{ task.taskName }}</td>
                 <td>{{ task.category }}</td>
+                <td>{{ task.stickers }}</td>
                 <td>{{ task.month }}/{{ task.day }}/{{ task.year }}</td>
                 <td>{{ task.progress }}/{{ task.sections }}</td>
                 <td>{{ task.value }}</td>

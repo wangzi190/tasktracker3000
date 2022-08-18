@@ -6,7 +6,9 @@
 <head>
     {% block css %}
     <style>
-        
+    #deleteButton {
+        margin-top: 0.5rem;
+    }
     </style>
     {% endblock %}
 </head>
@@ -14,13 +16,23 @@
 <body>
     {% block content %}
     <div class="row justify-content-center">
-        <b>Header</b>
+        <b>Delete Tasks</b>
     </div>
     <div class="row justify-content-center">
     <div class="column">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <p class="card-text" id="content"></p>
+                <form method="POST" id="deleteTask" action={{url_for('tasks.taskToDelete')}}>
+                    <label for="taskToDelete" class="faddCategory"><b>ID →</b></label>
+                    <select id="taskToDelete" name="taskToDelete">
+                        {% for task in tasks %}
+                            {% if task.user_id == current_user.id %}
+                                <option value="{{ task.id }}">{{ task.id }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select><br>
+                    <input type="submit" id="deleteButton" class="btn btn-primary" value="Delete">
+                </form>
             </div>
         </div>
     </div>

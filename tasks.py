@@ -64,7 +64,25 @@ def edit():
 @tasks.route("/delete")
 @login_required
 def delete():
-    return render_template("/delete.html")
+    from main import Task
+    tasks = Task.query
+    return render_template("/delete.html", tasks=tasks)
+
+@tasks.route("/delete", methods=['POST'])
+@login_required
+def taskToDelete():
+    from main import Task, db
+    toDelete=request.form['taskToDelete']
+    if toDelete:
+        Task.query.filter_by(id=toDelete).delete()
+        db.session.commit()
+        flash('Task successfully deleted.')
+        return redirect(url_for('tasks.view'))
+    else:
+        flash('Missing required field. Please try again.')
+    return render_template("/delete.html", tasks=tasks)
+
+"""taskName=request.form['taskName']"""
 
 @tasks.route("/categories")
 @login_required
@@ -74,19 +92,37 @@ def categories():
     return render_template("/categories.html", categories=categories)
 
 @tasks.route("/categories", methods=['POST'])
+def categoryToDelete():
+    from main import Category, db
+    detect=request.form['detect']
+    if detect=="delete":
+        toDelete=request.form['categoryToDelete']
+        if toDelete != "null":
+            Category.query.filter_by(id=toDelete).delete()
+            db.session.commit()
+            flash('Category successfully deleted.')
+            return redirect(url_for('tasks.categories'))
+        else:
+            flash('Missing required field. Please try again.')
+    return render_template("/categories.html")
+
+@tasks.route("/categories", methods=['POST'])
 def categories_action():
     from main import Category, db
-    categoryName=request.form['categoryName']
-    if categoryName:
-        newCategory = Category(
-            current_user.id,
-            str(categoryName)
-        )
-        db.session.add(newCategory)
-        db.session.commit()
-        flash('Category created successfully.')
-    else:
-        flash('Missing required field. Please try again.')
+    detect=request.form['detect']
+    if detect=="create":
+        categoryName=request.form['categoryName']
+        if categoryName:
+            newCategory = Category(
+                current_user.id,
+                str(categoryName)
+            )
+            db.session.add(newCategory)
+            db.session.commit()
+            flash('Category created successfully.')
+            return redirect(url_for('tasks.categories'))
+        else:
+            flash('Missing required field. Please try again.')
     return render_template("/categories.html")
 
 @tasks.route("/stickers")

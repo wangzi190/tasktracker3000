@@ -56,8 +56,8 @@
                             <form method="POST" id="addCategory" action={{url_for('tasks.categories_action')}}>
                                 <label for="categoryName" class="faddCategory"><b>Category Name</b></label>
                                 <input type="text" class="faddCategory form-control" id="categoryName" name="categoryName">
-                                
-                                <input type="submit" class="faddCategory btn btn-primary" value="Create">
+                                <input type="hidden" name="detect" value="create">
+                                <input type="submit" class="faddCategory btn btn-primary" name="action" value="Create">
                               </form>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                 <div class="row justify-content-center">
                     <div class="card btm" style="width: 18rem;">
                         <div class="card-body">
-                            <form method="POST" id="updateCategory" action={{url_for('tasks.categories_action')}}></form>
+                            <form method="POST" id="updateCategory" action={{url_for('tasks.categories')}}>
                             <label for="categoryToUpdate" class="faddCategory"><b>ID →</b></label>
                             <select id="categoryToUpdate" name="categoryToUpdate">
                                 {% for category in categories %}
@@ -99,22 +99,24 @@
                                     {% endif %}
                                 {% endfor %}
                             </select><br>
-                            <input type="submit" id="deleteButton" class="btn btn-primary" value="Update">
+                            <input type="hidden" name="detect" value="update">
+                            <input type="submit" id="deleteButton" class="btn btn-primary" name="action" value="Update">
                             </form>
                         </div>
                     </div>
                     <div class="card btm" style="width: 18rem;">
                         <div class="card-body">
-                            <form method="POST" id="deleteCategory" action={{url_for('tasks.categories_action')}}></form>
+                            <form method="POST" id="deleteCategory" action={{url_for('tasks.categoryToDelete')}}>
                             <label for="categoryToDelete" class="faddCategory"><b>ID →</b></label>
-                            <select id="categoryToDelete" name="categoryToDelete">
+                            <select id="categoryToDelete" name="categoryToDelete" value="null">
                                 {% for category in categories %}
                                     {% if category.user_id == current_user.id %}
                                         <option value={{ category.id }}>{{ category.id }}</option>
                                     {% endif %}
                                 {% endfor %}
                             </select><br>
-                            <input type="submit" id="deleteButton" class="btn btn-primary" value="Delete">
+                            <input type="hidden" name="detect" value="delete">
+                            <input type="submit" id="deleteButton" class="btn btn-primary" name="action" value="Delete">
                             </form>
                         </div>
                     </div>
