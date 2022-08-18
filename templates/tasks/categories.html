@@ -13,7 +13,15 @@
   {% block css %}
   <style>
     .top {
-      margin-top: 2rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .btm {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
     .faddCategory {
       margin-bottom: 0.5rem;
@@ -21,32 +29,80 @@
     #categoryName {
       margin-bottom: 1.5rem;
     }
-    #text {
-      margin-left: 0.5rem;
+    input[type="text"]{
+        background-color:#b1eaf2 !important
     }
-    #cssHide {
+    #hiddenTitle {
         color: #b3e9f5;
     }
   </style>
   {% endblock %}
 </head>
 <body>
-  {% block content %}
+{% block content %}
   <div class="container">
-    <div class="row justify-content-center">
-      <div class="column">
-        <form method="POST" id="addCategory" action={{url_for('tasks.categories_action')}}>
-          <label for="categoryName" class="faddCategory top"><b>Category Name</b></label>
-          <input type="text" class="faddCategory form-control" id="categoryName" name="categoryName">
-          
-          <input type="submit" class="faddCategory btn btn-primary" value="Create">
+        <div class="row justify-content-center">
+            <b id="hiddenTitle">Task Menu</b>
+        </div>
+        <div class="row justify-content-center">
 
-          <label for="label" id="cssHide">text text text text text text</label>
-          <input type="hidden" value="null" name="label">
-        </form>
-      </div>
+            <div class="column">
+                <div class="row justify-content-center">
+                    <div class="card top" style="width: 18rem;">
+                        <div class="card-body">
+                            <form method="POST" id="addCategory" action={{url_for('tasks.categories_action')}}>
+                                <label for="categoryName" class="faddCategory"><b>Category Name</b></label>
+                                <input type="text" class="faddCategory form-control" id="categoryName" name="categoryName">
+                                
+                                <input type="submit" class="faddCategory btn btn-primary" value="Create">
+                              </form>
+                        </div>
+                    </div>
+                    <div class="card top" style="width: 18rem;">
+                        <div class="card-body">
+                            <table class="table table-sm table-borderless table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b>ID</b></td>
+                                        <td><b>Name</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for category in categories %}
+                                    <tr>
+                                        <td>{{ category.id }}</td>
+                                        <td>{{ category.categoryName }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>    
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="row justify-content-center">
+                    <div class="card btm" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-title">Update</p>
+
+                        </div>
+                    </div>
+                    <div class="card btm" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-title">Delete</p>
+                            <select id="deleteCategory" name="deleteCategory">
+                                {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.id }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-  </div>
-  {% endblock %}
+{% endblock %}
 </body>
 </html>

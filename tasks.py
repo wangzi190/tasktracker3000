@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 tasks = Blueprint('tasks', __name__, url_prefix='/tasks', template_folder='templates/tasks')
 
 @tasks.route("/")
+@login_required
 def menu():
     return render_template("/menu.html")
 
@@ -14,6 +15,7 @@ def view():
     return render_template("/view.html", tasks=tasks)
 
 @tasks.route("/create")
+@login_required
 def create():
     return render_template("/create.html")
 
@@ -54,33 +56,43 @@ def task_create():
     return render_template("/create.html")
 
 @tasks.route("/edit")
+@login_required
 def edit():
     return render_template("/edit.html")
 
 @tasks.route("/delete")
+@login_required
 def delete():
     return render_template("/delete.html")
 
 @tasks.route("/categories")
 @login_required
 def categories():
-    return render_template("/categories.html")
+    from main import Category
+    categories = Category.query
+    return render_template("/categories.html", categories=categories)
 
 @tasks.route("/categories", methods=['POST'])
-@login_required
 def categories_action():
     from main import Category, db
     categoryName=request.form['categoryName']
-    newCategory = Category(
-        user_id=current_user.id,
-        categoryName=categoryName
-    )
-    db.session.add(newCategory)
-    db.session.commit()
-
+    if categoryName:
+        newCategory = Category(
+            current_user.id,
+            str(categoryName)
+        )
+        db.session.add(newCategory)
+        db.session.commit()
+        flash('Category created successfully.')
+    else:
+        flash('Missing required field. Please try again.')
     return render_template("/categories.html")
 
 @tasks.route("/stickers")
 @login_required
 def stickers():
+    return render_template("/stickers.html")
+
+@tasks.route("/stickers", methods=['POST'])
+def stickers_action():
     return render_template("/stickers.html")

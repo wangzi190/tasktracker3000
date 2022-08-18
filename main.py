@@ -65,6 +65,10 @@ class User(UserMixin, db.Model):
         "Task",
         backref='user'
     )
+    categories = db.relationship(
+        "Category",
+        backref='user'
+    )
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -158,11 +162,12 @@ class Category(db.Model):
     )
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey('user.id')
+        db.ForeignKey('user.id'),
+        nullable=False
     )
     categoryName = db.Column(
-        db.Integer,
-        nullable=False,
+        db.String(256),
+        nullable=False
     )
 
     def __repr__(self):
@@ -170,7 +175,7 @@ class Category(db.Model):
 
     def __init__(self, user_id, categoryName):
         self.user_id = user_id
-        self.month = categoryName
+        self.categoryName = categoryName
 
     def get_id(self):
         return self.id

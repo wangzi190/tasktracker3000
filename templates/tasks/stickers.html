@@ -4,28 +4,105 @@
 <html>
 
 <head>
-    {% block css %}
-    <style>
-        
-    </style>
-    {% endblock %}
+  <!--
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  -->
+  {% block css %}
+  <style>
+    .top {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .btm {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .faddsticker {
+      margin-bottom: 0.5rem;
+    }
+    #stickerFile {
+        margin-bottom: 1.5rem;
+    }
+    input[type="text"]{
+        background-color:#b1eaf2 !important
+    }
+    #hiddenTitle {
+        color: #b3e9f5;
+    }
+  </style>
+  {% endblock %}
 </head>
-
 <body>
-    {% block content %}
-    <div class="row justify-content-center">
-        <b>Header</b>
-    </div>
-    <div class="row justify-content-center">
-    <div class="column">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <p class="card-text" id="content"></p>
+  {% block content %}
+  <div class="container">
+        <div class="row justify-content-center">
+            <b id="hiddenTitle">Task Menu</b>
+        </div>
+        <div class="row justify-content-center">
+
+            <div class="column">
+                <div class="row justify-content-center">
+                    <div class="card top" style="width: 18rem;">
+                        <div class="card-body">
+                            <form method="POST" id="addSticker" action={{url_for('tasks.stickers_action')}}>
+                                <label for="stickerName" class="faddsticker"><b>Sticker Name</b></label>
+                                <input type="text" class="faddsticker form-control" id="stickerName" name="stickerName">
+                                <label for="stickerFile" class="faddsticker"><b>File Upload</b></label>
+                                <input type="file" class="faddsticker form-control" id="stickerFile" name="stickerFile">
+                                
+                                <input type="submit" class="faddsticker btn btn-primary" value="Create">
+                              </form>
+                        </div>
+                    </div>
+                    <div class="card top" style="width: 18rem;">
+                        <div class="card-body">
+                            <table class="table table-sm table-borderless table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b>ID</b></td>
+                                        <td><b>Name</b></td>
+                                        <td><b>Image</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for sticker in stickers %}
+                                    <tr>
+                                        <td>{{ sticker.id }}</td>
+                                        <td>{{ sticker.stickerName }}</td>
+                                        <td>{{ sticker.image }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>    
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="column">
+                <div class="row justify-content-center">
+                    <div class="card btm" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-title">Update</p>
+
+                        </div>
+                    </div>
+                    <div class="card btm" style="width: 18rem;">
+                        <div class="card-body">
+                            <p class="card-title">Delete</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    </div>
-    {% endblock %}
+  {% endblock %}
 </body>
-
 </html>
