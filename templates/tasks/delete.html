@@ -22,7 +22,7 @@
     <div class="column">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <form method="POST" id="deleteTask" action={{url_for('tasks.taskToDelete')}}>
+                <form method="POST" id="deleteTask" action={{url_for('tasks.tasks_delete')}}>
                     <label for="taskToDelete" class="faddCategory"><b>ID →</b></label>
                     <select id="taskToDelete" name="taskToDelete">
                         {% for task in tasks %}
