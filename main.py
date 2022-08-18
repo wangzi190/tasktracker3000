@@ -69,6 +69,10 @@ class User(UserMixin, db.Model):
         "Category",
         backref='user'
     )
+    stickers = db.relationship(
+        "Sticker",
+        backref='user'
+    )
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -112,8 +116,12 @@ class Task(db.Model):
         nullable=False
     )
     category = db.Column(
-        db.String(256),
+        db.Integer,
         nullable=False
+    )
+    progress = db.Column(
+        db.Integer,
+        nullable=False,
     )
     sections = db.Column(
         db.Integer,
@@ -135,13 +143,14 @@ class Task(db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.taskName)
 
-    def __init__(self, user_id, month, day, year, taskName, category, sections, value, completed, stickers):
+    def __init__(self, user_id, month, day, year, taskName, category, progress, sections, value, completed, stickers):
         self.user_id = user_id
         self.month = month
         self.day = day
         self.year = year
         self.taskName = taskName
         self.category = category
+        self.progress = progress
         self.sections = sections
         self.value = value
         self.completed = completed
@@ -176,6 +185,36 @@ class Category(db.Model):
     def __init__(self, user_id, categoryName):
         self.user_id = user_id
         self.categoryName = categoryName
+
+    def get_id(self):
+        return self.id
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return None
+
+class Sticker(db.Model):
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+    )
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('user.id'),
+        nullable=False
+    )
+    stickerFile = db.Column(
+        db.String(256),
+        nullable=False
+    )
+
+    def __repr__(self):
+        return '<User {}>'.format(self.taskName)
+
+    def __init__(self, user_id, stickerFile):
+        self.user_id = user_id
+        self.stickerFile = stickerFile
 
     def get_id(self):
         return self.id

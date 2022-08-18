@@ -38,6 +38,7 @@ def task_create():
                     year=splitDate[0],
                     taskName=str(taskName),
                     category='category',
+                    progress=0,
                     sections=sections,
                     value=value,
                     completed=False,

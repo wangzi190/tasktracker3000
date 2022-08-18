@@ -72,10 +72,13 @@
                                 </thead>
                                 <tbody>
                                 {% for category in categories %}
+                                    {% if category.user_id == current_user.id %}
                                     <tr>
                                         <td>{{ category.id }}</td>
                                         <td>{{ category.categoryName }}</td>
                                     </tr>
+                                    {% endif %}
+                                    
                                 {% endfor %}
                                 </tbody>    
                             </table>
@@ -87,8 +90,17 @@
                 <div class="row justify-content-center">
                     <div class="card btm" style="width: 18rem;">
                         <div class="card-body">
-                            <p class="card-title">Update</p>
-
+                            <form method="POST" id="updateCategory" action={{url_for('tasks.categories_action')}}></form>
+                            <label for="categoryToUpdate" class="faddCategory"><b>ID →</b></label>
+                            <select id="categoryToUpdate" name="categoryToUpdate">
+                                {% for category in categories %}
+                                    {% if category.user_id == current_user.id %}
+                                        <option value={{ category.id }}>{{ category.id }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select><br>
+                            <input type="submit" id="deleteButton" class="btn btn-primary" value="Delete">
+                            </form>
                         </div>
                     </div>
                     <div class="card btm" style="width: 18rem;">
@@ -97,7 +109,9 @@
                             <label for="categoryToDelete" class="faddCategory"><b>ID →</b></label>
                             <select id="categoryToDelete" name="categoryToDelete">
                                 {% for category in categories %}
-                                <option value={{ category.id }}>{{ category.id }}</option>
+                                    {% if category.user_id == current_user.id %}
+                                        <option value={{ category.id }}>{{ category.id }}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select><br>
                             <input type="submit" id="deleteButton" class="btn btn-primary" value="Delete">

@@ -25,22 +25,24 @@
                 <td><b>Name</b></td>
                 <td><b>Category</b></td>
                 <td><b>Date</b></td>
-                <td><b>Sections</b></td>
+                <td><b>Progress</b></td>
                 <td><b>Value</b></td>
                 <td><b>Complete?</b></td>
             </tr>
         </thead><br>
         <tbody>
         {% for task in tasks %}
+            {% if task.user_id == current_user.id %}
             <tr>
                 <td>{{ task.stickers }}</td>
                 <td>{{ task.taskName }}</td>
                 <td>{{ task.category }}</td>
                 <td>{{ task.month }}/{{ task.day }}/{{ task.year }}</td>
-                <td>{{ task.sections }}</td>
+                <td>{{ task.progress }}/{{ task.sections }}</td>
                 <td>{{ task.value }}</td>
                 <td>{{ task.completed }}</td>
             </tr><br>
+            {% endif %}
         {% endfor %}
         </tbody>    
         </table>

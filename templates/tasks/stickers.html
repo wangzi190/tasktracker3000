@@ -75,11 +75,13 @@
                                 </thead>
                                 <tbody>
                                 {% for sticker in stickers %}
+                                    {% if sticker.user_id == current_user.id %}
                                     <tr>
                                         <td>{{ sticker.id }}</td>
                                         <td>{{ sticker.stickerName }}</td>
                                         <td>{{ sticker.image }}</td>
                                     </tr>
+                                    {% endif %}
                                 {% endfor %}
                                 </tbody>    
                             </table>
@@ -101,7 +103,9 @@
                             <label for="stickerToDelete" class="faddSticker"><b>ID →</b></label>
                             <select id="stickerToDelete" name="stickerToDelete">
                                 {% for sticker in stickers %}
-                                <option value={{ sticker.id }}>{{ sticker.id }}</option>
+                                    {% if sticker.user_id == current_user.id %}
+                                        <option value={{ sticker.id }}>{{ sticker.id }}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select><br>
                             <input type="submit" id="deleteButton" class="btn btn-primary" value="Delete">
