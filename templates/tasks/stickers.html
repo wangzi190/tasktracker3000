@@ -35,6 +35,9 @@
     #hiddenTitle {
         color: #b3e9f5;
     }
+    #deleteButton {
+        margin-top: 0.5rem;
+    }
   </style>
   {% endblock %}
 </head>
@@ -94,8 +97,15 @@
                     </div>
                     <div class="card btm" style="width: 18rem;">
                         <div class="card-body">
-                            <p class="card-title">Delete</p>
-
+                            <form method="POST" id="deleteSticker" action={{url_for('tasks.categories_action')}}></form>
+                            <label for="stickerToDelete" class="faddSticker"><b>ID →</b></label>
+                            <select id="stickerToDelete" name="stickerToDelete">
+                                {% for sticker in stickers %}
+                                <option value={{ sticker.id }}>{{ sticker.id }}</option>
+                                {% endfor %}
+                            </select><br>
+                            <input type="submit" id="deleteButton" class="btn btn-primary" value="Delete">
+                            </form>
                         </div>
                     </div>
                 </div>
