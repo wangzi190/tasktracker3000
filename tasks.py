@@ -17,13 +17,16 @@ def view():
 @tasks.route("/create")
 @login_required
 def create():
-    return render_template("/create.html")
+    from main import Category
+    categories = Category.query
+    return render_template("/create.html", categories=categories)
 
 @tasks.route("/create", methods=['POST'])
 def task_create():
     from main import Task, db
     taskName=request.form['taskName']
     monthDayYear=request.form['monthDayYear']
+    category=request.form['category']
     value=request.form['value']
     sections=request.form['sections']
     if taskName and monthDayYear:
@@ -31,13 +34,17 @@ def task_create():
             if sections != 0:
                 monthDayYear = str(monthDayYear)
                 splitDate = monthDayYear.split("-")
+                if category:
+                    category=category
+                else:
+                    category="N/A"
                 newTask = Task(
                     user_id=current_user.id,
                     month=splitDate[1],
                     day=splitDate[2],
                     year=splitDate[0],
                     taskName=str(taskName),
-                    category='category',
+                    category=category,
                     progress=0,
                     sections=sections,
                     value=value,
@@ -131,7 +138,7 @@ def categories_action():
 def stickers():
     return render_template("/stickers.html")
 
-@tasks.route("/stickers", methods=['POST'])
+@tasks.route("/stickers_action", methods=['POST'])
 def stickers_action():
     return render_template("/stickers.html")
 

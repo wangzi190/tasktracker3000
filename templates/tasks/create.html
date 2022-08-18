@@ -43,6 +43,14 @@
           <label for="monthDayYear" class="faddTask"><b>Date</b></label>
           <input type="date" class="faddTask form-control" name="monthDayYear">
           
+          <select id="category" name="category">
+            {% for category in categories %}
+                {% if category.user_id == current_user.id %}
+                    <option value={{ category.name }}>{{ category.name }}</option>
+                {% endif %}
+            {% endfor %}
+          </select><br>
+
         <div class="row">
           <div class="col">
           <label for="value" class="faddTask"><b>Value</b></label>
