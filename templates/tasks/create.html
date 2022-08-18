@@ -40,26 +40,28 @@
           <label for="taskName" class="faddTask top"><b>Task Name</b></label>
           <input type="text" class="faddTask form-control" name="taskName">
 
-          <label for="monthDayYear" class="faddTask"><b>Date</b></label>
-          <input type="date" class="faddTask form-control" name="monthDayYear">
-          
-          <select id="category" name="category">
+          <label for="category"><b>Category</b></label>
+          <select id="category" class="faddTask form-control" name="category">
+            <option>N/A</option>
             {% for category in categories %}
                 {% if category.user_id == current_user.id %}
-                    <option value={{ category.name }}>{{ category.name }}</option>
+                    <option value={{ category.categoryName }}>{{ category.categoryName }}</option>
                 {% endif %}
             {% endfor %}
-          </select><br>
+          </select>
+
+          <label for="monthDayYear" class="faddTask"><b>Date</b></label>
+          <input type="date" class="faddTask form-control" name="monthDayYear">
 
         <div class="row">
           <div class="col">
+            <label for="Sections" class="faddTask"><b>Sections</b></label>
+            <input type="number" class="faddTask form-control" id="sections" name="sections" min="0" value="0">
+          </div>
+
+          <div class="col">
           <label for="value" class="faddTask"><b>Value</b></label>
           <input type="number" class="faddTask form-control" name="value" min="0" value="0">
-          </div>
-          
-          <div class="col">
-          <label for="Sections" class="faddTask"><b>Sections</b></label>
-          <input type="number" class="faddTask form-control" id="sections" name="sections" min="0" value="0">
           </div>
         </div>
           
